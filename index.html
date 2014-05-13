@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Galaxian</title>
+		<style>
+			#background {
+				background:#1f1f1f;
+				position:absolute;
+				top:0;
+				left:0;
+				z-index:-2;
+			}
+
+			#main {
+				position:absolute;
+				top:0;
+				left:0;
+				z-index:-1;
+			}
+
+			#ship {
+				position:absolute;
+				top:0;
+				left:0;
+				z-index:0;
+			}
+
+			.canvas-wrap {
+				width:320px;
+				margin:0 auto 0 auto;
+				position:relative;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="canvas-wrap">
+			<canvas id='background' width="320" height="480">
+				Y U NO SUPPORT CANVAS - UPGRADE NAAOOOOWWWWW!
+			</canvas>
+			<canvas id="main" width="320" height="480"></canvas>
+			<canvas id="ship" width="320" height="480"></canvas>
+		</div>
+		<script src="js/main.js"></script>
+	</body>
+</html>
