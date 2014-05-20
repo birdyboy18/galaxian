@@ -175,7 +175,10 @@ function Bullet(object) {
 	}
 
 	this.draw = function() {
-		this.ctx.clearRect(this.x,this.y,this.width,this.height);
+		//The reason we deduct the starting position of the rectangle and add double that onto the width
+		//is so that we don't get an anoying streky trail effect where it's not properly being cleared - 
+		//I think this is due to automatic anti-analising
+		this.ctx.clearRect(this.x-1,this.y-1,this.width+2,this.height+2);
 		this.y -= this.speed;
 		if (self === "bullet" && this.y <= 0 - this.height) {
 			return true;
