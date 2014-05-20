@@ -271,9 +271,9 @@ function Enemy() {
 		this.speedX = 0;
 		this.speedY = speed;
 		this.alive = true;
-		this.leftEdge = this.x -90;
-		this.rightEdge = this.x + 90;
-		this.bottomEdge = this.y + 90;
+		this.leftEdge = this.x -30;
+		this.rightEdge = this.x + 30;
+		this.bottomEdge = this.y + this.height*3 + 30;
 	};
 	/**
 		Move the enemy
@@ -411,14 +411,14 @@ function Game() {
 			this.enemyPool.init("enemy");
 			var height = imgRepo.enemy.height;
 			var width = imgRepo.enemy.width;
-			var x = 100;
+			var x = 30;
 			var y = -height;
-			var spacer = y * 1.5;
-			for (i = 0; i <= 18; i++) {
+			var spacer = y *1;
+			for (i = 1; i <= 15; i++) {
 				this.enemyPool.get(x,y,2);
-				x += width + 25;
-				if (i % 6 == 0) {
-					x = 100;
+				x += width + 10;
+				if (i % 5 == 0) {
+					x = 30;
 					y += spacer;
 				}
 			}
