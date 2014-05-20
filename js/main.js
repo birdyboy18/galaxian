@@ -40,7 +40,7 @@ var imgRepo = new function() {
 	this.background1.src = "images/bg1.png";
 	this.background2.src = "images/bg2.png";
 	this.ship.src = "images/ship.png";
-	this.bullet.src = "images/bullets.png";
+	this.bullet.src = "images/bullet.png";
 
 }
 
@@ -168,10 +168,10 @@ function Bullet() {
 Bullet.prototype = new Drawable();
 
 function Ship() {
-	this.speed = 3;
+	this.speed = 5;
 	this.bulletPool = new Pool(30);
 	this.bulletPool.init();
-	var fireRate = 15;
+	var fireRate = 10;
 	var counter = 0;
 	this.draw = function() {
 		this.ctx.drawImage(imgRepo.ship, this.x,this.y);
@@ -213,7 +213,7 @@ function Ship() {
 	};
 
 	this.fire = function() {
-		this.bulletPool.get(this.x,this.y,3);
+		this.bulletPool.getTwo(this.x+5,this.y+20,10,this.x+40,this.y+20,10);
 	}
 }
 
@@ -284,7 +284,7 @@ function Game() {
 			Bullet.prototype.canvasWidth = this.mainCanvas.width;
 			Bullet.prototype.canvasHeight = this.mainCanvas.height;
 			//Initilise the new background objects
-			this.background1 = new Background(imgRepo.background1,1.3);
+			this.background1 = new Background(imgRepo.background1,10);
 			this.background1.init(0,0);
 
 			this.background2 = new Background(imgRepo.background2,1);
