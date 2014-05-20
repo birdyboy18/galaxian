@@ -293,7 +293,7 @@ function Game() {
 			this.ship = new Ship();
 
 			var shipStartX = this.shipCanvas.width/2 - imgRepo.ship.width;
-			var shipStartY = (this.shipCanvas.height/4*3)/2 + imgRepo.ship.height;
+			var shipStartY = (this.shipCanvas.height/4*3) + imgRepo.ship.height/2;
 			this.ship.init(shipStartX,shipStartY,imgRepo.ship.width,imgRepo.ship.height);
 			return true;
 		} else {
