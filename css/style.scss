@@ -1,0 +1,5 @@
+//Import the default settings giving access to mixins for layout and prefixes
+@import "defaults.scss";
+
+//Import all the base styles for the site
+@import "queries/base.scss";
