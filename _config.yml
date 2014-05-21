@@ -1,0 +1,7 @@
+name: "Galaxian Development Blog"
+description: "A blog to document the making of galaxian, and maybe a bit of ios"
+paginate: 10
+permalink: pretty
+highlighter: Rouge
+
+baseurl: '/galaxian'
