@@ -10,7 +10,11 @@ converting into text and html thanks to the powers of Jekyll an awesome static s
 
 <p>So she swallowed one of the cakes, and was delighted to find that she  began shrinking directly. As soon as she was small enough to get through  the door, she ran out of the house, and found quite a crowd of little  animals and birds waiting outside. The poor little Lizard, Bill, was  in the middle, being held up by two guinea-pigs, who were giving it  something out of a bottle. They all made a rush at Alice the moment she  appeared; but she ran off as hard as she could, and soon found herself  safe in a thick wood.</p>
 
-<p>'The first thing I've got to do,' said Alice to herself, as she wandered  about in the wood, 'is to grow to my right size again; and the second  thing is to find my way into that lovely garden. I think that will be  the best plan.'</p>
+<div class="img-holder" markdown="1">
+<img src="{{site.baseurl}}/assets/orion_nebula.jpg" alt="">
+</div>
+
+'The first thing I've got to do,' said Alice to herself, as she wandered  about in the wood, 'is to grow to my right size again; and the second  thing is to find my way into that lovely garden. I think that will be  the best plan.'
 
 <p>It sounded an excellent plan, no doubt, and very neatly and simply  arranged; the only difficulty was, that she had not the smallest idea  how to set about it; and while she was peering about anxiously among  the trees, a little sharp bark just over her head made her look up in a  great hurry.</p>
 

@@ -171,4 +171,19 @@ nav {
 .post {
 	padding-top:3.125rem;
 	padding-bottom:3.125rem;
+
+	p {
+		line-height:1.5em;
+		color:#666666
+	}
+
+	.img-holder {
+		width: 100%;
+		text-align:center;
+		margin-bottom: 1.25rem;
+
+		img {
+			max-width: 100%;
+		}
+	}
 }
