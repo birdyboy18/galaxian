@@ -11,7 +11,7 @@ html {
   padding: 0 0 0 0;
   margin: 0 0 0 0;
   height: 100%;
-  font-size: 1em;
+  font-size: 1.125em;
 }
 
 body {
@@ -32,9 +32,26 @@ h1, h2 {
   margin: 0 0 1.5rem 0;
 }
 
+h1 {
+  text-transform: uppercase;
+}
+
 p {
   padding: 0 0 0 0;
   margin: 0 0 1.5rem 0;
+}
+
+.row {
+  width: 100%;
+  padding: 0 0 0 0;
+  margin: 0 0 0 0;
+}
+.row:before, .row:after {
+  content: " ";
+  display: table;
+}
+.row:after {
+  clear: both;
 }
 
 .container {
@@ -74,6 +91,24 @@ header {
   color: #999999;
   margin-bottom: 0;
   text-align: center;
+}
+
+.hero {
+  padding: 6.25rem 0;
+  background: #333333;
+  text-align: center;
+}
+.hero h1, .hero h2 {
+  color: #ffffff;
+}
+.hero h1 {
+  font-size: 3rem;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+}
+.hero h2 {
+  font-size: 1.125rem;
+  color: #aaaaaa;
 }
 
 .post-list {
