@@ -5,4 +5,6 @@ paginate: 10
 permalink: :categories/:title
 highlighter: Rouge
 
+markdown: kramdown
+
 baseurl: '/galaxian'
