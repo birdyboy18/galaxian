@@ -69,8 +69,11 @@ p {
 }
 
 header {
-  padding: 0 0;
-  background: #333333;
+  padding: 0 0 0 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
 }
 
 nav {
@@ -80,6 +83,7 @@ nav {
 nav ul {
   padding: 0 0 0 0;
   margin: 0 0 0 0;
+  overflow: hidden;
 }
 nav ul li {
   list-style: none;
@@ -92,9 +96,10 @@ nav ul li a {
 }
 
 .hero {
-  padding: 6.25rem 0;
-  background: #333333;
+  padding: 9.375rem 0 6.25rem 0;
+  background: #333333 url("../assets/stars.png") fixed;
   text-align: center;
+  overflow: hidden;
 }
 .hero h1, .hero h2 {
   color: #ffffff;
