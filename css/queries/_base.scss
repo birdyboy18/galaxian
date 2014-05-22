@@ -25,6 +25,7 @@ h1, h2 {
 	font-weight: 400;
 	padding: 0 0 0 0;
 	margin: 0 0 1.5rem 0;
+	line-height:1.5em;
 }
 
 h1 {
@@ -35,6 +36,7 @@ h1 {
 p {
 	padding: 0 0 0 0;
 	margin: 0 0 1.5rem 0;
+	color:#444444;
 }
 
 .row {
@@ -48,7 +50,7 @@ p {
 	width: columns(12);
 	margin: 0 auto 0 auto;
 	padding: 0 1.25rem 0 1.25rem;
-	max-width: 32.5rem;
+	max-width: 35rem;
 	@include clearfix();
 }
 
@@ -85,7 +87,7 @@ nav {
 
 .hero {
 	padding: 9.375rem 0 6.25rem 0;
-	background:#333333 url("../assets/stars.png") fixed;
+	background:#333333;
 	text-align:center;
 	overflow:hidden;
 
@@ -103,6 +105,14 @@ nav {
 		font-size:1.125rem;
 		color:#aaaaaa;
 	}
+
+	time {
+		font-size:1rem;
+		text-transform:uppercase;
+		color:#666666;
+		letter-spacing: 2px;
+	}
+
 }
 
 .post-list {
@@ -134,4 +144,9 @@ nav {
 	.excerpt {
 		color:#666666;
 	}
+}
+
+.post {
+	padding-top:3.125rem;
+	padding-bottom:3.125rem;
 }
