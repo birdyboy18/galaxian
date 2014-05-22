@@ -41,8 +41,8 @@ p {
 }
 
 header {
-	padding: 1.875rem 0;
-	border-bottom: 1px solid #cccccc;
+	padding: 1.25rem 0;
+	border-bottom: 1px solid #eeeeee;
 }
 
 .logo {
@@ -68,10 +68,12 @@ header {
 
 .post-list {
 	padding: 0 0 0 0;
-	margin: 3.125rem 0 0 0;
+	margin: 0 0 0 0;
 
 	li {
 		list-style:none;
+		border-bottom: 1px solid #eeeeee;
+		padding: 3.125rem 0;
 	}
 
 	.post-title {
@@ -88,5 +90,9 @@ header {
 		time {
 			color:#999999;
 		}
+	}
+
+	.excerpt {
+		color:#666666;
 	}
 }
