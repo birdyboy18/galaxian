@@ -6,7 +6,7 @@ html {
 	padding: 0 0 0 0;
 	margin: 0 0 0 0;
 	height:100%;
-	font-size: 1.125em; //16px
+	font-size: 1.125em; //18px
 }
 
 body {
@@ -53,29 +53,29 @@ p {
 }
 
 header {
+	padding: 0 0;
+	background: #333333;
+}
+
+nav {
+	width: columns(12);
 	padding: 1.25rem 0;
-	border-bottom: 1px solid #eeeeee;
-}
 
-.logo {
-	font-size: 1.375rem;
-	width: columns(12);
-	float:left;
-	margin-right: 10px;
-	margin-bottom: 0;
-	text-align:center;
+	ul {
+		padding: 0 0 0 0;
+		margin: 0 0 0 0;
 
-	a {
-		color:#333333;
+		li {
+			list-style:none;
+
+			a {
+				color:#999999;
+				display:block;
+				float:left;
+				padding: 0.625rem 0.9375rem;
+			}
+		}
 	}
-}
-
-.tagline {
-	float:left;
-	width: columns(12);
-	color:#999999;
-	margin-bottom: 0;
-	text-align:center;
 }
 
 .hero {
