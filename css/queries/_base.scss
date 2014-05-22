@@ -13,7 +13,7 @@ body {
 	padding: 0 0 0 0;
 	margin: 0 0 0 0;
 	height:100%;
-	font-family: sans-serif;
+	font-family: "Ubuntu", sans-serif;
 	line-height:1.5rem;
 }
 
@@ -35,6 +35,58 @@ p {
 .container {
 	width: columns(12);
 	margin: 0 auto 0 auto;
-	padding: 0 0 0 0;
+	padding: 0 1.25rem 0 1.25rem;
 	max-width: 32.5rem;
+	@include clearfix();
+}
+
+header {
+	padding: 1.875rem 0;
+	border-bottom: 1px solid #cccccc;
+}
+
+.logo {
+	font-size: 1.375rem;
+	width: columns(12);
+	float:left;
+	margin-right: 10px;
+	margin-bottom: 0;
+	text-align:center;
+
+	a {
+		color:#333333;
+	}
+}
+
+.tagline {
+	float:left;
+	width: columns(12);
+	color:#999999;
+	margin-bottom: 0;
+	text-align:center;
+}
+
+.post-list {
+	padding: 0 0 0 0;
+	margin: 3.125rem 0 0 0;
+
+	li {
+		list-style:none;
+	}
+
+	.post-title {
+		margin-bottom: 1.5rem;
+
+		h1 {
+			margin-bottom: 0;
+
+			a {
+				color:#333333;
+			}
+		}
+
+		time {
+			color:#999999;
+		}
+	}
 }
