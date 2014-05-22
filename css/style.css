@@ -142,9 +142,27 @@ nav ul li a {
 }
 .post-list .post-title time {
   color: #999999;
+  float: left;
+  margin-right: 0.625rem;
 }
 .post-list .excerpt {
   color: #666666;
+}
+.post-list .categories {
+  padding: 0 0 0 0.625rem;
+  margin: 0 0 0 0;
+  overflow: hidden;
+  border-left: 1px solid #eeeeee;
+}
+.post-list .categories li {
+  padding: 0 0 0 0;
+  margin: 0 0 0 0;
+  border: none;
+  float: left;
+  text-transform: uppercase;
+}
+.post-list .categories li a {
+  color: #999999;
 }
 
 .post {

@@ -138,11 +138,32 @@ nav {
 
 		time {
 			color:#999999;
+			float:left;
+			margin-right: 0.625rem;
 		}
 	}
 
 	.excerpt {
 		color:#666666;
+	}
+
+	.categories {
+		padding: 0 0 0 0.625rem;
+		margin: 0 0 0 0;
+		overflow:hidden;
+		border-left: 1px solid #eeeeee;
+
+		li {
+			padding: 0 0 0 0;
+			margin: 0 0 0 0;
+			border:none;
+			float:left;
+			text-transform: uppercase;
+
+			a {
+				color: #999999;
+			}
+		}
 	}
 }
 

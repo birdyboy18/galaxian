@@ -2,7 +2,7 @@ name: "Galaxian"
 tagline: "The Development Blog"
 description: "A blog documenting the making of a galaxian / space invader-esque game, and maybe a smidgen of ios"
 paginate: 10
-permalink: pretty
+permalink: :categories/:title
 highlighter: Rouge
 
 baseurl: '/galaxian'
