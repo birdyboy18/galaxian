@@ -1,0 +1,49 @@
+---
+layout: base
+title: "Galaxian | Posts Under Uncategorised"
+---
+{% if site.categories['ios']%}
+<div class="row hero">
+	<div class="container">
+		<h1>Uncategorised</h1>
+		<h2>The Posts that don't belong</h2>
+	</div>
+</div>
+
+<div class="container">
+	<ul class="post-list">
+		{% for post in site.posts %}
+		<li>
+			<article>
+				<div class="post-title">
+					<h1><a href="{{ site.baseurl}}/{{ post.url }}">{{ post.title }}</a></h1>
+					<time>{{ post.date | date_to_long_string }}</time>
+					<ul class="categories">
+					{% if post.categories != empty  %}
+						{% for category in post.categories %}
+							<li><a href="{{ site.baseurl}}/{{category}}">{{ category }}</a></li>
+						{% endfor%}
+					{% else %}
+						<li><a href="{{ site.baseurl}}/uncategorised">uncategorised</li>
+					{% endif %}
+					</ul>
+				</div>
+				<div class="excerpt">
+					{{ post.excerpt }}
+				</div>
+			</article>
+		</li>
+		{% endfor %}
+	</ul>
+</div>
+{% else %}
+<div class="row hero">
+	<div class="container">
+		<h1>Uncategorised</h1>
+		<h2>The Posts that don't belong</h2>
+	</div>
+</div>
+<div class="container post">
+	<h1>Oh Snap! - There doesn't seem to be any posts in this category</h1>
+</div>
+{% endif %}
