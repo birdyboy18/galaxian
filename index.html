@@ -20,10 +20,10 @@ title: Paul Bird | Galaxian Development Blog
 					<ul class="categories">
 					{% if post.categories != empty  %}
 						{% for category in post.categories %}
-							<li>{{ category }}</li>
+							<li><a href="{{ site.baseurl}}/{{category}}">{{ category }}</a></li>
 						{% endfor%}
 					{% else %}
-						<li>Uncategorised</li>
+						<li><a href="{{ site.baseurl}}/uncategorised">uncategorised</li>
 					{% endif %}
 					</ul>
 				</div>
