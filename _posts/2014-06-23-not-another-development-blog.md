@@ -10,7 +10,7 @@ This blog is hosted on the gh-pages of the entire project, so this site is versi
 
 # The purpose of this blog
 
-The true purpose of this blog is simply to document my understanding of making a sapce invaders-esque game in javascript. It's worth noting that I am developing this from scratch by following a tutorial and then editing where needed, these are the things that I will be documenting the small things I've changed that are not in the tutorial.
+The true purpose of this blog is simply to document my understanding of making a space invaders-esque game in javascript. It's worth noting that I am developing this from scratch by following a tutorial and then editing where needed, these are the things that I will be documenting the small things I've changed that are not in the tutorial.
 
 
 
