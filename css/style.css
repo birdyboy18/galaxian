@@ -173,7 +173,11 @@ nav ul li a {
 }
 .post p {
   line-height: 1.5em;
-  color: #666666;
+  color: #555555;
+}
+.post h1 {
+  font-size: 1.375rem;
+  color: #333333;
 }
 .post .img-holder {
   width: 100%;
