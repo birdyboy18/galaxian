@@ -3,7 +3,7 @@ tagline: "The Development Blog"
 description: "A blog documenting the making of a galaxian / space invader-esque game, and maybe a smidgen of ios"
 paginate: 10
 permalink: :categories/:title
-highlighter: Rouge
+highlighter: rouge
 
 markdown: kramdown
 
