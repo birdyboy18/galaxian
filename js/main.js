@@ -263,7 +263,7 @@ Ship.prototype = new Drawable();
 */
 
 function Enemy() {
-	var percentFire = 0.1;
+	var percentFire = 0.0001;
 	var chance = 0;
 	this.alive = false;
 
@@ -397,10 +397,10 @@ function Game() {
 			Enemy.prototype.canvasHeight = this.mainCanvas.height;
 
 			//Initilise the new background objects
-			this.background1 = new Background(imgRepo.background1,10);
+			this.background1 = new Background(imgRepo.background1,1);
 			this.background1.init(0,0);
 
-			this.background2 = new Background(imgRepo.background2,1);
+			this.background2 = new Background(imgRepo.background2,10);
 			this.background2.init(0,0);
 			//Initilise the ship object
 			this.ship = new Ship();
