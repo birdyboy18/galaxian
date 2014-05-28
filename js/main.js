@@ -535,7 +535,7 @@ function Enemy() {
 		this.y = y;
 		this.speed = speed;
 		this.speedX = 0;
-		this.speedY = speed;
+		this.speedY = 2;
 		this.alive = true;
 		this.leftEdge = this.x -200;
 		this.rightEdge = this.x + 100;
@@ -548,12 +548,12 @@ function Enemy() {
 		this.ctx.clearRect(this.x-1,this.y,this.width+1,this.height);
 		this.x += this.speedX;
 		this.y += this.speedY;
+		console.log(this.speed);
 		if (this.x <= this.leftEdge) {
 			this.speedX = this.speed;
 		} else if (this.x >= this.rightEdge + this.canvasWidth) {
 			this.speedX = -this.speed;
 		} else if (this.y >= this.bottomEdge) {
-			this.speed = 1.5;
 			this.speedY = 0;
 			this.y -= 5;
 			this.speedX = -this.speed;
@@ -712,6 +712,7 @@ function Game() {
 			this.checkAudio = window.setInterval(function(){checkReadyState()},1000);
 
 			//Make an enemy object pool
+			this.flockSpeed = 1.5;
 			this.enemyPool = new Pool(30);
 			this.enemyPool.init("enemy");
 			this.enemyBulletPool = new Pool(50);
@@ -745,7 +746,7 @@ function Game() {
 		var y = -height;
 		var spacer = y -10;
 		for (i = 1; i <= 30; i++) {
-			this.enemyPool.get(x,y,2);
+			this.enemyPool.get(x,y,this.flockSpeed);
 			x += width + 10;
 			if (i % 10 == 0) {
 				x = 200;
@@ -825,6 +826,7 @@ function animate() {
 
 	//When there are no more enimies onscreen
 	if (game.enemyPool.getPool().length === 0) {
+		game.flockSpeed += 0.5;
 		game.spawnWave();
 	}
 
