@@ -502,6 +502,7 @@ function Ship() {
 			this.draw();
 		} else {
 			this.alive = false;
+			game.explosion.get();
 			game.gameOver();
 		}
 		if (KEY_STATUS.space && counter >= fireRate) {
