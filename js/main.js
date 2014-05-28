@@ -784,10 +784,15 @@ function Game() {
 
 	this.pause = function() {
 		this.backgroundAudio.pause();
+		this.ambientAudio.play();
+		document.getElementById('pause').style.display = "block";
 	}
 
 	this.continue = function() {
 		this.backgroundAudio.play();
+		this.ambientAudio.pause();
+		this.ambientAudio.currentTime = 0;
+		document.getElementById('pause').style.display = "none";
 	}
 }
 

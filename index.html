@@ -41,7 +41,7 @@
 				font-size: 18px;
 				font-family: "Clear Sans";
 			}
-			.gameover {
+			.gamescreen {
 				position:absolute;
 				z-index:1;
 				top:0;
@@ -53,14 +53,14 @@
 				display: none;
 			}
 
-			.gameover h1, .gameover h2, .gameover span {
+			.gamescreen h1, .gamescreen h2, .gamescreen span {
 					font-family: "Clear Sans", sans-serif;
 					color:#ffffff;
 					margin: 0 0 0 0;
 					padding: 0 0 0 0;
 					font-weight: 400;
 				}
-			.gameover h1 {
+			.gamescreen h1 {
 				margin-top: 250px;
 			}
 		</style>
@@ -73,10 +73,15 @@
 			<canvas id="main" width="800" height="600"></canvas>
 			<canvas id="ship" width="800" height="600"></canvas>
 			<div class="score">Score: <span id="score"></span></div>
-			<div class="gameover" id="gameover">
+			<div class="gamescreen" id="gameover">
 				<h1>Game Over</h1>
 				<h2>You Deaaddddddd</h2>
 				<span onclick="game.restart()">Restart</span>
+			</div>
+			<div class="gamescreen" id="pause">
+				<h1>Game Paused</h1>
+				<h2>What? Taking a break already</h2>
+				<span onclick="game.continue()">Resume</span>
 			</div>
 		</div>
 		<script src="js/main.js"></script>
