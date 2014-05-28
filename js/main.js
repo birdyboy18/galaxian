@@ -626,10 +626,8 @@ document.onkeydown = function(e) {
 	if (KEY_CODES[keyCode] == 'pause') {
 		if ( game.isPaused == false) {
 			game.pause();
-			game.isPaused = true;
 		} else if (game.isPaused == true) {
 			game.continue();
-			game.isPaused = false;
 		}
 	}
 }
@@ -783,12 +781,14 @@ function Game() {
 	}
 
 	this.pause = function() {
+		this.isPaused = true;
 		this.backgroundAudio.pause();
 		this.ambientAudio.play();
 		document.getElementById('pause').style.display = "block";
 	}
 
 	this.continue = function() {
+		this.isPaused = false;
 		this.backgroundAudio.play();
 		this.ambientAudio.pause();
 		this.ambientAudio.currentTime = 0;
