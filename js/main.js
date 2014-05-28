@@ -454,6 +454,7 @@ function Ship() {
 	var counter = 0;
 	this.collidableWith = "enemyBullet";
 	this.type = "ship";
+	this.alive = true;
 	this.draw = function() {
 		this.ctx.drawImage(imgRepo.ship, this.x,this.y);
 	};
@@ -488,6 +489,9 @@ function Ship() {
 			//We only want to draw the ship if it isn;t colliding
 			if (!this.isColliding) {
 				this.draw();
+			} else {
+				this.alive = false;
+				game.gameOver();
 			}
 		}
 		if (KEY_STATUS.space && counter >= fireRate) {
@@ -700,13 +704,13 @@ function Game() {
 		} else {
 			return false;
 		}
-	}
+	};
 
 	this.start = function() {
 		this.ship.draw();
 		//this.backgroundAudio.play();
 		animate();
-	}
+	};
 
 	this.spawnWave = function() {
 		var height = imgRepo.enemy.height;
@@ -723,6 +727,30 @@ function Game() {
 			}
 		}
 	};
+
+	this.gameOver = function() {
+		this.backgroundAudio.pause();
+		document.getElementById('gameover').style.display = "block";
+	}
+
+	this.restart = function() {
+		document.getElementById('gameover').style.display = "none";
+		this.bgCtx.clearRect(0,0,this.bgCanvas.width,this.bgCanvas.height);
+		this.shipCtx.clearRect(0,0,this.shipCanvas.width,this.shipCanvas.height);
+		this.mainCtx.clearRect(0,0,this.mainCanvas.width,this.mainCanvas.height);
+		this.quadTree.clear();
+		this.background1.init(0,0);
+		this.background2.init(0,0);
+		this.ship.init(this.shipStartX,this.shipStartY,imgRepo.ship.width,imgRepo.ship.height);
+		this.enemyPool.init("enemy");
+		this.spawnWave();
+		this.enemyBulletPool.init("enemyBullet");
+		this.playerScore = 0;
+		this.backgroundAudio.currentTime = 0;
+		this.backgroundAudio.play();
+
+		this.start();
+	}
 }
 
 /**
@@ -739,16 +767,19 @@ function animate() {
 	detectCollision();
 
 
-	requestAnimFrame(animate);
-	//Since we are drawing two backgrounds we need to clear the canvas only once
-	game.bgCtx.clearRect(0,0,game.bgCanvas.width,game.bgCanvas.height);
-	game.background1.draw();
-	game.background2.draw();
-	game.ship.move();
-	game.ship.bulletPool.animate();
-	game.enemyPool.animate();
-	game.enemyBulletPool.animate();
+	if (game.ship.alive) {
+		requestAnimFrame(animate);
+		//Since we are drawing two backgrounds we need to clear the canvas only once
+		game.bgCtx.clearRect(0,0,game.bgCanvas.width,game.bgCanvas.height);
+		game.background1.draw();
+		game.background2.draw();
+		game.ship.move();
+		game.ship.bulletPool.animate();
+		game.enemyPool.animate();
+		game.enemyBulletPool.animate();
+	}
 
+	//When there are no more enimies onscreen
 	if (game.enemyPool.getPool().length === 0) {
 		game.spawnWave();
 	}
