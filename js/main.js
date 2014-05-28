@@ -607,7 +607,8 @@ KEY_CODES = {
 	37: 'left',
 	38: 'up',
 	39: 'right',
-	40: 'down'
+	40: 'down',
+	80: 'pause'
 }
 
 KEY_STATUS = {};
@@ -620,6 +621,16 @@ document.onkeydown = function(e) {
 	if (KEY_CODES[keyCode]) {
 		e.preventDefault();
 		KEY_STATUS[KEY_CODES[keyCode]] = true;
+	}
+
+	if (KEY_CODES[keyCode] == 'pause') {
+		if ( game.isPaused == false) {
+			game.pause();
+			game.isPaused = true;
+		} else if (game.isPaused == true) {
+			game.continue();
+			game.isPaused = false;
+		}
 	}
 }
 
@@ -683,6 +694,8 @@ function Game() {
 
 			//set the player score to 0
 			this.playerScore = 0;
+
+			this.isPaused = false;
 
 			//Add all of the sounds for the game
 			this.laser = new SoundPool(10);
@@ -768,6 +781,14 @@ function Game() {
 
 		this.start();
 	}
+
+	this.pause = function() {
+		this.backgroundAudio.pause();
+	}
+
+	this.continue = function() {
+		this.backgroundAudio.play();
+	}
 }
 
 /**
@@ -783,9 +804,9 @@ function animate() {
 	game.quadTree.insert(game.enemyBulletPool.getPool());
 	detectCollision();
 
-
 	if (game.ship.alive) {
 		requestAnimFrame(animate);
+		if (!game.isPaused) {
 		//Since we are drawing two backgrounds we need to clear the canvas only once
 		game.bgCtx.clearRect(0,0,game.bgCanvas.width,game.bgCanvas.height);
 		game.background1.draw();
@@ -794,6 +815,7 @@ function animate() {
 		game.ship.bulletPool.animate();
 		game.enemyPool.animate();
 		game.enemyBulletPool.animate();
+		}
 	}
 
 	//When there are no more enimies onscreen
