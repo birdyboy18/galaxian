@@ -511,6 +511,7 @@ function Enemy() {
 			}
 			return false;
 		} else {
+			game.playerScore += 10;
 			return true;
 		}
 	};
@@ -586,6 +587,7 @@ function Game() {
 		this.bgCanvas = document.getElementById('background');
 		this.shipCanvas = document.getElementById('ship');
 		this.mainCanvas = document.getElementById('main');
+		this.scoreElement = document.getElementById('score');
 		// Test if it can get the context
 		if (this.bgCanvas.getContext) {
 			this.bgCtx = this.bgCanvas.getContext('2d');
@@ -620,6 +622,9 @@ function Game() {
 			var shipStartX = this.shipCanvas.width/2 - imgRepo.ship.width;
 			var shipStartY = (this.shipCanvas.height/4*3) + imgRepo.ship.height/2;
 			this.ship.init(shipStartX,shipStartY,imgRepo.ship.width,imgRepo.ship.height);
+
+			//set the player score to 0
+			this.playerScore = 0;
 
 			//Make an enemy object pool
 			this.enemyPool = new Pool(30);
@@ -683,6 +688,8 @@ function animate() {
 	game.ship.bulletPool.animate();
 	game.enemyPool.animate();
 	game.enemyBulletPool.animate();
+
+	game.scoreElement.innerHTML = game.playerScore;
 }
 
 window.requestAnimFrame = (function(){

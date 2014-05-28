@@ -30,6 +30,16 @@
 				margin:0 auto 0 auto;
 				position:relative;
 			}
+
+			.score {
+				position: absolute;
+				top:20px;
+				left:20px;
+				cursor: default;
+				color: #ffffff;
+				font-size: 18px;
+				font-family: "Clear Sans";
+			}
 		</style>
 	</head>
 	<body>
@@ -39,6 +49,8 @@
 			</canvas>
 			<canvas id="main" width="800" height="600"></canvas>
 			<canvas id="ship" width="800" height="600"></canvas>
+			<div class="score">Score: <span id="score"></span></div>
+
 		</div>
 		<script src="js/main.js"></script>
 	</body>
