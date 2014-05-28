@@ -381,7 +381,7 @@ function SoundPool(maxSize) {
 			}
 		} else if (object == "explosion") {
 			for (var i = 0; i < size; i++) {
-				var explosion = new Audio("sounds/explosion.aiff");
+				var explosion = new Audio("sounds/explosion.wav");
 				explosion.volume = .1;
 				explosion.load();
 				pool[i] = explosion;
@@ -498,6 +498,7 @@ function Ship() {
 
 	this.fire = function() {
 		this.bulletPool.getTwo(this.x+5,this.y+20,10,this.x+40,this.y+20,10);
+		game.laser.get();
 	}
 }
 
@@ -553,6 +554,7 @@ function Enemy() {
 			return false;
 		} else {
 			game.playerScore += 10;
+			game.explosion.get();
 			return true;
 		}
 	};
@@ -714,7 +716,7 @@ function Game() {
 
 	this.start = function() {
 		this.ship.draw();
-		//this.backgroundAudio.play();
+		this.backgroundAudio.play();
 		animate();
 	}
 }
