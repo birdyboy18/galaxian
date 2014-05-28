@@ -141,7 +141,7 @@ function QuadTree(boundBox,lvl) {
 		This function returns all the objects that the given object might actually collide with
 	*/
 	this.findObjects = function(returnedObjects, obj) {
-		if (typeof obj === 'undefined') {
+		if (typeof obj === "undefined") {
 			console.log("UNDEFINED OBJECT");
 			return;
 		}
@@ -159,7 +159,7 @@ function QuadTree(boundBox,lvl) {
 		bigger than the capacity then it will split it up and add all the objects to the right nodes in the tree
 	*/
 	this.insert = function(obj) {
-		if (typeof obj === 'undefined') {
+		if (typeof obj === "undefined") {
 			return;
 		}
 		if (obj instanceof Array) {
@@ -178,7 +178,7 @@ function QuadTree(boundBox,lvl) {
 		objects.push(obj);
 		//Prevent infinite splitting
 		if (objects.length > maxObjects && level < maxLevels) {
-			if (this.nodes[0] = null) {
+			if (this.nodes[0] == null) {
 				this.split();
 			}
 			var i = 0;
@@ -298,6 +298,8 @@ function Pool(maxSize) {
 			for (i = 0; i < size; i++) {
 				var bullet = new Bullet("bullet");
 				bullet.init(0,0, imgRepo.bullet.width, imgRepo.bullet.height);
+				bullet.collidableWith = "enemy";
+				bullet.type = "bullet";
 				pool[i] = bullet;
 			}
 		} else if (object == "enemy") {
@@ -310,10 +312,22 @@ function Pool(maxSize) {
 			for (i = 0; i < size; i++) {
 				var bullet = new Bullet("enemyBullet");
 				bullet.init(0,0, imgRepo.enemyBullet.width, imgRepo.enemyBullet.height);
+				bullet.collidableWith = "ship";
+				bullet.type = "enemyBullet";
 				pool[i] = bullet;
 			}
 		}
 	};
+
+	this.getPool = function() {
+		var obj = [];
+		for (var i = 0; i < size; i++) {
+			if (pool[i].alive) {
+				obj.push(pool[i]);
+			}
+		}
+		return obj;
+	}
 
 	this.get = function(x,y,speed) {
 		if(!pool[size - 1].alive) {
@@ -361,7 +375,10 @@ function Bullet(object) {
 		//I think this is due to automatic anti-analising
 		this.ctx.clearRect(this.x-1,this.y-1,this.width+2,this.height+2);
 		this.y -= this.speed;
-		if (self === "bullet" && this.y <= 0 - this.height) {
+		if (this.isColliding) {
+			return true;
+		}
+		else if (self === "bullet" && this.y <= 0 - this.height) {
 			return true;
 		} else if (self === "enemyBullet" && this.y >= this.canvasHeight) {
 			return true;
@@ -382,6 +399,7 @@ function Bullet(object) {
 		this.y = 0;
 		this.speed = 0;
 		this.alive = false;
+		this.isColliding = false;
 	};
 }
 
@@ -393,6 +411,8 @@ function Ship() {
 	this.bulletPool.init("bullet");
 	var fireRate = 10;
 	var counter = 0;
+	this.collidableWith = "enemyBullet";
+	this.type = "ship";
 	this.draw = function() {
 		this.ctx.drawImage(imgRepo.ship, this.x,this.y);
 	};
@@ -424,7 +444,10 @@ function Ship() {
 					this.y = this.canvasHeight - this.height;
 				}
 			}
-			this.draw();
+			//We only want to draw the ship if it isn;t colliding
+			if (!this.isColliding) {
+				this.draw();
+			}
 		}
 		if (KEY_STATUS.space && counter >= fireRate) {
 			this.fire();
@@ -447,6 +470,8 @@ function Enemy() {
 	var percentFire = 0.0001;
 	var chance = 0;
 	this.alive = false;
+	this.collidableWith = "bullet";
+	this.type = "enemy";
 
 	this.spawn= function(x,y,speed) {
 		this.x = x;
@@ -477,11 +502,16 @@ function Enemy() {
 			this.speedX = -this.speed;
 		}
 
-		this.ctx.drawImage(imgRepo.enemy, this.x,this.y);
-		//Enemy has a chance to shoot everytime it moves
-		chance = Math.floor(Math.random()*101);
-		if (chance/100 <= percentFire) {
-			this.fire();
+		if (!this.isColliding) {
+			this.ctx.drawImage(imgRepo.enemy, this.x,this.y);
+			//Enemy has a chance to shoot everytime it moves
+			chance = Math.floor(Math.random()*101);
+			if (chance/100 <= percentFire) {
+				this.fire();
+			}
+			return false;
+		} else {
+			return true;
 		}
 	};
 
@@ -503,6 +533,7 @@ function Enemy() {
 		this.speedX = 0;
 		this.speedY = 0;
 		this.alive = false;
+		this.isColliding = false;
 	}
 }
 
@@ -609,6 +640,14 @@ function Game() {
 			this.enemyBulletPool = new Pool(50);
 			this.enemyBulletPool.init("enemyBullet");
 
+			//Make a new quadtree to start using
+			this.quadTree = new QuadTree({
+				x:0,
+				y:0,
+				width: this.mainCanvas.width,
+				height: this.mainCanvas.height
+			});
+
 			return true;
 		} else {
 			return false;
@@ -626,6 +665,15 @@ function Game() {
 */
 
 function animate() {
+	//Insert all the required objects into the quadtree
+	game.quadTree.clear();
+	game.quadTree.insert(game.ship);
+	game.quadTree.insert(game.ship.bulletPool.getPool());
+	game.quadTree.insert(game.enemyPool.getPool());
+	game.quadTree.insert(game.enemyBulletPool.getPool());
+	detectCollision();
+
+
 	requestAnimFrame(animate);
 	//Since we are drawing two backgrounds we need to clear the canvas only once
 	game.bgCtx.clearRect(0,0,game.bgCanvas.width,game.bgCanvas.height);
@@ -647,6 +695,31 @@ window.requestAnimFrame = (function(){
 				window.setTimeout(callback, 1000 / 60);
 			};
 })();
+
+/**
+	Detect Collision
+*/
+
+function detectCollision() {
+	var objects = [];
+	game.quadTree.getAllObjects(objects);
+	for (var x = 0, len = objects.length; x < len; x++) {
+		game.quadTree.findObjects(obj = [], objects[x]);
+		for (y = 0, length = obj.length; y < length; y++) {
+		
+			//Collsiion Detection Algortihm
+			if ( objects[x].collidableWith === obj[y].type &&
+				(objects[x].x < obj[y].x + obj[y].width &&
+			     objects[x].x + objects[x].width  > obj[y].x &&
+			     objects[x].y < obj[y].y + obj[y].height &&
+				 objects[x].y + objects[x].height > obj[y].y)) {
+				objects[x].isColliding = true;
+				obj[y].isColliding = true;
+			}
+
+		}
+	}
+};
 
 /**
 	Initialise the game and start it
