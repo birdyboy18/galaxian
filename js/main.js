@@ -684,21 +684,9 @@ function Game() {
 			//Make an enemy object pool
 			this.enemyPool = new Pool(30);
 			this.enemyPool.init("enemy");
-			var height = imgRepo.enemy.height;
-			var width = imgRepo.enemy.width;
-			var x = 200;
-			var y = -height;
-			var spacer = y -10;
-			for (i = 1; i <= 30; i++) {
-				this.enemyPool.get(x,y,2);
-				x += width + 10;
-				if (i % 10 == 0) {
-					x = 200;
-					y += spacer;
-				}
-			}
 			this.enemyBulletPool = new Pool(50);
 			this.enemyBulletPool.init("enemyBullet");
+			this.spawnWave();
 
 			//Make a new quadtree to start using
 			this.quadTree = new QuadTree({
@@ -716,9 +704,25 @@ function Game() {
 
 	this.start = function() {
 		this.ship.draw();
-		this.backgroundAudio.play();
+		//this.backgroundAudio.play();
 		animate();
 	}
+
+	this.spawnWave = function() {
+		var height = imgRepo.enemy.height;
+		var width = imgRepo.enemy.width;
+		var x = 200;
+		var y = -height;
+		var spacer = y -10;
+		for (i = 1; i <= 30; i++) {
+			this.enemyPool.get(x,y,2);
+			x += width + 10;
+			if (i % 10 == 0) {
+				x = 200;
+				y += spacer;
+			}
+		}
+	};
 }
 
 /**
@@ -744,6 +748,10 @@ function animate() {
 	game.ship.bulletPool.animate();
 	game.enemyPool.animate();
 	game.enemyBulletPool.animate();
+
+	if (game.enemyPool.getPool().length === 0) {
+		game.spawnWave();
+	}
 
 	game.scoreElement.innerHTML = game.playerScore;
 }
