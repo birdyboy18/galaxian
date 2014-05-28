@@ -8,6 +8,10 @@
 				box-sizing: border-box;
 			}
 
+			body {
+				font-family: "Clear Sans", sans-serif;
+			}
+
 			#background {
 				background:#1f1f1f;
 				position:absolute;
@@ -44,8 +48,17 @@
 				cursor: default;
 				color: #ffffff;
 				font-size: 18px;
-				font-family: "Clear Sans";
 			}
+
+			#flock {
+				position:absolute;
+				z-index:2;
+				top:20px;
+				right:20px;
+				color:#ffffff;
+				font-size:18px;
+			}
+
 			.gamescreen {
 				position:absolute;
 				z-index:1;
@@ -59,7 +72,6 @@
 			}
 
 			.gamescreen h1, .gamescreen h2, .gamescreen span {
-					font-family: "Clear Sans", sans-serif;
 					color:#ffffff;
 					margin: 0 0 0 0;
 					padding: 0 0 0 0;
@@ -94,6 +106,7 @@
 			<canvas id="main" width="800" height="600"></canvas>
 			<canvas id="ship" width="800" height="600"></canvas>
 			<div class="score">Score: <span id="score"></span></div>
+			<span id="flock"></span>
 			<div class="gamescreen" id="gameover">
 				<h1>Game Over</h1>
 				<h2>You Deaaddddddd</h2>

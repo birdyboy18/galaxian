@@ -693,14 +693,16 @@ function Game() {
 			//set the player score to 0
 			this.playerScore = 0;
 
+			//Game settings
 			this.isPaused = false;
+			this.isMuted = false;
 
 			//Add all of the sounds for the game
 			this.laser = new SoundPool(10);
 			this.laser.init("laser");
 			this.explosion = new SoundPool(20);
 			this.explosion.init("explosion");
-			this.backgroundAudio = new Audio("sounds/backgroundMusic.wav");
+			this.backgroundAudio = new Audio("sounds/pumpin.mp3");
 			this.backgroundAudio.loop = true;
 			this.backgroundAudio.volume = .25;
 			this.backgroundAudio.load();
@@ -777,6 +779,7 @@ function Game() {
 		this.backgroundAudio.currentTime = 0;
 		this.ambientAudio.pause();
 		this.ambientAudio.currentTime = 0;
+		this.flockSpeed = 1.5;
 
 		this.start();
 	}
@@ -794,6 +797,10 @@ function Game() {
 		this.ambientAudio.pause();
 		this.ambientAudio.currentTime = 0;
 		document.getElementById('pause').style.display = "none";
+	}
+
+	this.muteBg = function() {
+		this.ambientAudio.pause();
 	}
 }
 
@@ -831,6 +838,7 @@ function animate() {
 	}
 
 	game.scoreElement.innerHTML = game.playerScore;
+	document.getElementById('flock').innerHTML = game.flockSpeed;
 }
 
 window.requestAnimFrame = (function(){
