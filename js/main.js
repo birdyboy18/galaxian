@@ -693,6 +693,10 @@ function Game() {
 			this.backgroundAudio.loop = true;
 			this.backgroundAudio.volume = .25;
 			this.backgroundAudio.load();
+			this.ambientAudio = new Audio("sounds/ambient.wav");
+			this.ambientAudio.loop = true;
+			this.volume = .25;
+			this.ambientAudio.load();
 
 			this.checkAudio = window.setInterval(function(){checkReadyState()},1000);
 
@@ -741,6 +745,7 @@ function Game() {
 
 	this.gameOver = function() {
 		this.backgroundAudio.pause();
+		this.ambientAudio.play();
 		document.getElementById('gameover').style.display = "block";
 	}
 
@@ -758,6 +763,8 @@ function Game() {
 		this.enemyBulletPool.init("enemyBullet");
 		this.playerScore = 0;
 		this.backgroundAudio.currentTime = 0;
+		this.ambientAudio.pause();
+		this.ambientAudio.currentTime = 0;
 
 		this.start();
 	}
@@ -834,7 +841,7 @@ function detectCollision() {
 };
 
 function checkReadyState() {
-	if (game.backgroundAudio.readyState === 4) {
+	if (game.backgroundAudio.readyState === 4 && game.ambientAudio.readyState === 4) {
 		window.clearInterval(game.checkAudio);
 		game.start();
 	}
