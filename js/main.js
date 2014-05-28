@@ -449,12 +449,22 @@ Bullet.prototype = new Drawable();
 function Ship() {
 	this.speed = 5;
 	this.bulletPool = new Pool(30);
-	this.bulletPool.init("bullet");
 	var fireRate = 10;
 	var counter = 0;
 	this.collidableWith = "enemyBullet";
 	this.type = "ship";
-	this.alive = true;
+
+	this.init = function(x,y,width,height) {
+		//default variables
+		this.x = x;
+		this.y = y;
+		this.width = width;
+		this.height = height;
+		this.alive = true;
+		this.isColliding = false;
+		this.bulletPool.init("bullet");
+	}
+
 	this.draw = function() {
 		this.ctx.drawImage(imgRepo.ship, this.x,this.y);
 	};
@@ -486,13 +496,13 @@ function Ship() {
 					this.y = this.canvasHeight - this.height;
 				}
 			}
-			//We only want to draw the ship if it isn;t colliding
-			if (!this.isColliding) {
-				this.draw();
-			} else {
-				this.alive = false;
-				game.gameOver();
-			}
+		}
+		//We only want to draw the ship if it isn't colliding
+		if (!this.isColliding) {
+			this.draw();
+		} else {
+			this.alive = false;
+			game.gameOver();
 		}
 		if (KEY_STATUS.space && counter >= fireRate) {
 			this.fire();
@@ -666,9 +676,9 @@ function Game() {
 			//Initilise the ship object
 			this.ship = new Ship();
 
-			var shipStartX = this.shipCanvas.width/2 - imgRepo.ship.width;
-			var shipStartY = (this.shipCanvas.height/4*3) + imgRepo.ship.height/2;
-			this.ship.init(shipStartX,shipStartY,imgRepo.ship.width,imgRepo.ship.height);
+			this.shipStartX = this.shipCanvas.width/2 - imgRepo.ship.width;
+			this.shipStartY = (this.shipCanvas.height/4*3) + imgRepo.ship.height/2;
+			this.ship.init(this.shipStartX,this.shipStartY,imgRepo.ship.width,imgRepo.ship.height);
 
 			//set the player score to 0
 			this.playerScore = 0;
@@ -708,7 +718,7 @@ function Game() {
 
 	this.start = function() {
 		this.ship.draw();
-		//this.backgroundAudio.play();
+		this.backgroundAudio.play();
 		animate();
 	};
 
@@ -747,7 +757,6 @@ function Game() {
 		this.enemyBulletPool.init("enemyBullet");
 		this.playerScore = 0;
 		this.backgroundAudio.currentTime = 0;
-		this.backgroundAudio.play();
 
 		this.start();
 	}
