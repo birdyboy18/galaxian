@@ -123,7 +123,7 @@ function QuadTree(boundBox,lvl) {
 		for (var i = 0; i < this.nodes.length; i++) {
 			this.nodes[i].getAllObjects(returnedObjects);
 		}
-		for (var i = 0; len = objects.length; i < len; i++) {
+		for (var i = 0, len = objects.length; i < len; i++) {
 			returnedObjects.push(objects[i]);
 		}
 		return returnedObjects;
@@ -140,7 +140,7 @@ function QuadTree(boundBox,lvl) {
 		if (index != -1 && this.nodes.length) {
 			this.nodes[index].findObjects(returnedObjects, obj);
 		}
-		for (var i = 0; len = objects.length; i < len; i++) {
+		for (var i = 0, len = objects.length; i < len; i++) {
 			returnedObjects.push(objects[i]);
 		}
 		return returnedObjects;
@@ -154,7 +154,7 @@ function QuadTree(boundBox,lvl) {
 			return;
 		}
 		if (obj instanceof Array) {
-			for (var i = 0; len = obj.length; i < len; i++) {
+			for (var i = 0, len = obj.length; i < len; i++) {
 				this.insert(obj[i]);
 			}
 			return;
