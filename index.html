@@ -8,9 +8,15 @@
 				box-sizing: border-box;
 			}
 
+			html {
+				height:100%;
+			}
+
 			body {
 				font-family: "Clear Sans", sans-serif;
 				background:#1f1f1f;
+				height:100%;
+				color:#ffffff;
 			}
 
 			#background {
@@ -37,8 +43,9 @@
 
 			.canvas-wrap {
 				width:800px;
-				margin:0 auto 0 auto;
+				margin:25px auto 0 auto;
 				position:relative;
+				float:left;
 			}
 
 			.score {
@@ -97,9 +104,68 @@
 				background:#ffffff;
 				color:#333333;
 			}
+			.score-board {
+				float:left;
+				width:380px;
+				height:100%;
+				padding: 20px;
+			}
+
+			.logo {
+				font-family: "Ubuntu", sans-serif;
+				text-transform: uppercase;
+				letter-spacing: 2px;
+				font-weight:400;
+				text-align:center;
+				padding: 25px 0;
+			}
+
+			.score-board h2 {
+				font-size: 18px;
+				border-bottom: 1px solid #999999;
+				padding: 0 0 5px 10px;
+			}
+
+			.score-board ul {
+				padding: 0 0 0 0;
+				margin: 0 0 0 0;
+			}
+
+			.score-board ul li {
+				list-style:none;
+				padding: 10px 10px;
+				overflow:hidden;
+			}
+
+			.score-board ul li span {
+				display: block;
+			}
+
+			.score-board__name {
+				float:left;
+			}
+
+			.score-board__score {
+				float:right;
+			}
 		</style>
 	</head>
 	<body>
+		<div class="score-board">
+			<h1 class="logo">Galaxian</h1>
+			<h2>Top Scores</h2>
+			<ul>
+				<li>
+					<span class="score-board__name">Paul Bird</span><span class="score-board__score">3530</span>
+				</li>
+				<li>
+					<span class="score-board__name">Jane Doe</span><span class="score-board__score">2050</span>
+				</li>
+				<li>
+					<span class="score-board__name">John Doe</span><span class="score-board__score">1490</span>
+				</li>
+			</ul>
+		</div>
 		<div class="canvas-wrap">
 			<canvas id='background' width="800" height="600">
 				Y U NO SUPPORT CANVAS - UPGRADE NAAOOOOWWWWW!
@@ -119,6 +185,7 @@
 				<span onclick="game.continue()">Resume</span>
 			</div>
 		</div>
+		<link href='http://fonts.googleapis.com/css?family=Ubuntu' rel='stylesheet' type='text/css'>
 		<script src="js/main.js"></script>
 	</body>
 </html>
