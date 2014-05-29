@@ -800,6 +800,7 @@ function Game() {
 
 	this.muteBg = function() {
 		this.ambientAudio.pause();
+		this.backgroundAudio.pause();
 	}
 }
 
