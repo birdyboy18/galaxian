@@ -548,7 +548,6 @@ function Enemy() {
 		this.ctx.clearRect(this.x-1,this.y,this.width+1,this.height);
 		this.x += this.speedX;
 		this.y += this.speedY;
-		console.log(this.speed);
 		if (this.x <= this.leftEdge) {
 			this.speedX = this.speed;
 		} else if (this.x >= this.rightEdge + this.canvasWidth) {
@@ -773,13 +772,13 @@ function Game() {
 		this.background2.init(0,0);
 		this.ship.init(this.shipStartX,this.shipStartY,imgRepo.ship.width,imgRepo.ship.height);
 		this.enemyPool.init("enemy");
+		this.flockSpeed = 1.5;
 		this.spawnWave();
 		this.enemyBulletPool.init("enemyBullet");
 		this.playerScore = 0;
 		this.backgroundAudio.currentTime = 0;
 		this.ambientAudio.pause();
 		this.ambientAudio.currentTime = 0;
-		this.flockSpeed = 1.5;
 
 		this.start();
 	}
@@ -826,8 +825,8 @@ function animate() {
 		game.background2.draw();
 		game.ship.move();
 		game.ship.bulletPool.animate();
-		game.enemyPool.animate();
 		game.enemyBulletPool.animate();
+		game.enemyPool.animate();
 		}
 	}
 
