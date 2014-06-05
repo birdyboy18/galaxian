@@ -4,7 +4,7 @@ Galaxian is a take on the classic space shoot-em up. I went for a face paced fee
 
 ## How it was made
 
-I didn't really like the code we were given, therefore I remade the game by following the tutorial and editing as I wanted needed. You can find the Blog Post series I followed [here]("http://blog.sklambert.com/html5-canvas-game-panning-a-background/")
+I didn't really like the code we were given, therefore I remade the game by following a tutorial online and editing it as I wanted / needed. You can find the Blog Post series I followed [here](http://blog.sklambert.com/html5-canvas-game-panning-a-background/ "Link to start of tutorial series")
 
 ## Controls
 
