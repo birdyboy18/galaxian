@@ -647,6 +647,8 @@ document.onkeyup = function(e) {
 
 function Game() {
 
+	var self = this;
+
 	//First check to see if canvas is supported and if so get everything, if not stop the script
 	this.init = function() {
 		//Get the background canvas
@@ -654,6 +656,7 @@ function Game() {
 		this.shipCanvas = document.getElementById('ship');
 		this.mainCanvas = document.getElementById('main');
 		this.scoreElement = document.getElementById('score');
+		this.scoreBoardUl = document.getElementById('score-board');
 		// Test if it can get the context
 		if (this.bgCanvas.getContext) {
 			this.bgCtx = this.bgCanvas.getContext('2d');
@@ -726,6 +729,34 @@ function Game() {
 				y:0,
 				width: this.mainCanvas.width,
 				height: this.mainCanvas.height
+			});
+
+			//Get the scores
+			this.getScores("http://www.paulbird.co/galaxian/scores.json", function(data){
+				self.scores = data;
+
+				for (var i = 0; i < data.scores.length; i++) {
+					var li = document.createElement('li');
+					var spanName = document.createElement('span');
+					var spanScore = document.createElement('span');
+					var spanNameText = document.createTextNode(data.scores[i].name);
+					var spanScoreText = document.createTextNode(data.scores[i].score);
+
+					//append them into the elements
+					spanName.appendChild(spanNameText);
+					spanScore.appendChild(spanScoreText);
+
+					//set their classes
+					spanName.setAttribute('class','score-board__name');
+					spanScore.setAttribute('class','score-board__score');
+
+					//Append them to the li
+					li.appendChild(spanName);
+					li.appendChild(spanScore);
+
+					//Append it the the ul of teh scoreboard
+					self.scoreBoardUl.appendChild(li);
+				}
 			});
 
 			return true;
@@ -801,6 +832,25 @@ function Game() {
 	this.muteBg = function() {
 		this.ambientAudio.pause();
 		this.backgroundAudio.pause();
+	}
+
+	this.getScores = function(url,callback) {
+		req = new XMLHttpRequest();
+		req.responseType = 'json';
+
+		req.onreadystatechange = function(e) {
+			if (this.readyState == 4) { //Done
+				if (this.status == 200) { //Okay we got it
+					callback(this.response);
+				} else if ( this.status == 404) { //We couldn't find it
+					callback("We couldn't find the page, make sure the page exists or you spelt it correctly");
+				}
+			}
+		}
+
+		req.open("GET",url, true);
+		req.setRequestHeader("Access-Control-Allow-Origin", "*");
+		req.send(null);
 	}
 }
 
